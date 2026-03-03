@@ -1,0 +1,15 @@
+{
+  "@vite/client": {
+    "isEntry": true,
+    "file": "@vite/client",
+    "css": [],
+    "module": true,
+    "resourceType": "script"
+  },
+  "C:/_apps/_2026/03_VueJS_Laravel/laravel-course-backend-main/laravel-course-backend-main/frontend/node_modules/nuxt/dist/app/entry.mjs": {
+    "resourceType": "script",
+    "module": true,
+    "isEntry": true,
+    "file": "C:/_apps/_2026/03_VueJS_Laravel/laravel-course-backend-main/laravel-course-backend-main/frontend/node_modules/nuxt/dist/app/entry.mjs"
+  }
+}

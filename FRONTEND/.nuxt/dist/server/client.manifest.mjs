@@ -1,0 +1,1 @@
+export { default } from "file:///C:/_apps/_2026/03_VueJS_Laravel/laravel-course-backend-main/laravel-course-backend-main/frontend/node_modules/@nuxt/vite-builder/dist/runtime/client.manifest.mjs"
