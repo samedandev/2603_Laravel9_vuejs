@@ -1,7 +1,7 @@
 import axios from "axios";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 
-const csrfToken = Cookies.get("XSRF-TOKEN");
+// const csrfToken = Cookies.get("XSRF-TOKEN");
 
 export default defineNuxtPlugin(async (nuxtApp) => {
     // axios.defaults.baseURL = "http://localhost";
@@ -15,7 +15,24 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     axios.defaults.headers.common["Content-Type"] = "application/json";
     axios.defaults.headers.common["Accept"] = "application/json";
     axios.defaults.withCredentials = true;
-    axios.defaults.withXSRFToken = true;
+    // axios.defaults.withXSRFToken = true;
+
+    axios.interceptors.response.use(
+        (res) => res, // on success, do nothing
+        (error) => {
+            // on error
+            if (
+                [401, 419].includes(error.response.status) &&
+                // if not register page
+                !error.request.responseURL.endsWith("/api/user")
+            ) {
+                const { logout } = useAuth();
+                logout();
+            } else {
+                return Promise.reject(error);
+            }
+        },
+    );
 
     await axios.get("/sanctum/csrf-cookie", {
         baseURL: config.public.appURL,

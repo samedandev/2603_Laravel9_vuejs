@@ -1,7 +1,11 @@
 <script setup lang="ts">
+import axios from "axios";
+
 definePageMeta({
     middleware: ["auth"],
 });
+
+axios.get("/links");
 
 const links = [
     {

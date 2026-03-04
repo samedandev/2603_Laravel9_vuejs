@@ -83,3 +83,21 @@ async function initUser() {
         user.value = await getUser();
     }
 ```
+
+## Interceptors : Protect route after Cookie expire on Backend
+
+> /frontend/plugins/axiosPlugin
+
+```axios.interceptors.response.use(
+        (res) => res, // on success, do nothing
+        (error) => {
+            // on error
+            if ([401, 419].includes(error.response.status)) {
+                const { logout } = useAuth();
+                logout();
+            } else {
+                return Promise.reject(error);
+            }
+        },
+    );
+```
