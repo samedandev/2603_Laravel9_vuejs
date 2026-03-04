@@ -61,6 +61,11 @@ if($request->expectsJson()) {
 
 > npx nuxi add plugin axiosPlugin
 
+# Created Middleware
+
+> frontend/middleware/auth.ts
+> frontend/middleware/guest.ts
+
 # Added
 
 > /config/app.php -> App\Providers\FortifyServiceProvider::class,
