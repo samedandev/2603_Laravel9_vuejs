@@ -6,30 +6,14 @@ definePageMeta({
     middleware: ["guest"],
 });
 
-interface RegisterPayload {
-    name: string;
-    email: string;
-    password: string;
-    password_confirmation: string;
-}
-
 const form = ref({
     name: "",
     email: "",
     password: "",
     password_confirmation: "",
 });
-
-async function register(payload: RegisterPayload) {
-    // POST /api/register
-    const res = await axios.post("/register", payload);
-    console.log(res);
-    await axios.post("/login", {
-        email: payload.email,
-        password: payload.password,
-    });
-    useRouter().push("/me");
-}
+// use composable
+const { register } = useAuth();
 </script>
 <template>
     <div class="register">

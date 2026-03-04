@@ -73,3 +73,7 @@ if($request->expectsJson()) {
 ## Redirecting after login
 
 > ![redirecting](https://github.com/samedandev/2603_Laravel9_vuejs/blob/main/_printscreens/printscreen01.jpg)
+
+## Composables Nuxt
+
+> /frontend/composables/useAuth.ts

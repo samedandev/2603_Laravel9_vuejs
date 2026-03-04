@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import axios from "axios";
-
 definePageMeta({
     layout: "centered",
     middleware: ["guest"],
@@ -11,15 +9,7 @@ const form = ref({
     password: "",
 });
 
-interface LoginPayload {
-    email: string;
-    password: string;
-}
-
-async function login(payload: LoginPayload) {
-    await axios.post("/login", payload);
-    useRouter().push("/me");
-}
+const { login } = useAuth();
 </script>
 <template>
     <div class="login">
