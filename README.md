@@ -101,3 +101,16 @@ async function initUser() {
         },
     );
 ```
+
+## Backend Resource Controller for CRUD
+
+> /app/Http/Controllers/Links.php
+> /routes/api.php
+
+# Laravel Vue Pagination
+
+> https://laravel-vue-pagination.org/
+
+> Frontedn/pages/links/index.vue
+
+> ![Pagination](https://github.com/samedandev/2603_Laravel9_vuejs/blob/main/_printscreens/printscreen02.jpg)

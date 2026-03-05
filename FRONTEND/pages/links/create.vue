@@ -2,18 +2,18 @@
 import type { FormKitNode } from "@formkit/core";
 import axios, { AxiosError } from "axios";
 import { nanoid } from "nanoid";
-// import { handleInvalidForm } from "utils/index";
+import { handleInvalidForm } from "../../utils";
 // import type {FormKitNode} from "@formkit/core"
 
 definePageMeta({
     middleware: ["auth"],
 });
 
-function handleInvalidForm(err: any, node?: FormKitNode) {
-    if (err instanceof AxiosError && err.response?.status === 422) {
-        node?.setErrors([], err.response.data.errors);
-    }
-}
+// function handleInvalidForm(err: any, node?: FormKitNode) {
+//     if (err instanceof AxiosError && err.response?.status === 422) {
+//         node?.setErrors([], err.response.data.errors);
+//     }
+// }
 
 async function createLink(payload, node?: FormKitNode) {
     try {
