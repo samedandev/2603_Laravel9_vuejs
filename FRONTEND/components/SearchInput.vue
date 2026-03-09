@@ -7,12 +7,14 @@ const emit = defineEmits<{
     (e: "update:modelValue", payload: string): void;
 }>();
 
+// value comes from prop
 const localValue = ref(prop.modelValue);
 
-// time to debounce a value
+// time to debounce a value (debouncedLocalValue) only after 500
 const debouncedLocalValue = refDebounced(localValue, 500);
 
 watch(debouncedLocalValue, () => {
+    // emit an event whenever changes
     emit("update:modelValue", localValue.value);
 });
 </script>

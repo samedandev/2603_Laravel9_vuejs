@@ -16,7 +16,7 @@ definePageMeta({
 });
 
 const data = ref<PaginatedResponse<Link | null>>(null);
-const page = ref(useRoute().query.page || 1); // initial Page=1 load
+// const page = ref(useRoute().query.page || 1); // initial Page=1 load
 await getLinks();
 
 // declare data as reactive to update links with pagination
@@ -24,13 +24,19 @@ let links = computed(() => data.value?.data);
 
 // pagination page
 
-watch(page, async () => {
-    getLinks();
-    useRouter().push({ query: { page: page.value } });
-});
+watch(
+    queries,
+    async () => {
+        getLinks();
+        useRouter().push({ query: queries.value });
+    },
+    { deep: true },
+);
 
 async function getLinks() {
-    const { data: res } = await axios.get(`/links?page=${page.value}`);
+    // @ts-expect-error page is number and its ok
+    const qs = new URLSearchParams(queries.value).toString();
+    const { data: res } = await axios.get(`/links?${qs}`);
     data.value = res;
 }
 
@@ -121,7 +127,7 @@ async function getLinks() {
             <!-- PAGINATION -->
             <TailwindPagination
                 :data="data"
-                @pagination-change-page="page = $event"
+                @pagination-change-page="queries.page = $event"
             />
 
             <div class="mt-5 flex justify-center"></div>

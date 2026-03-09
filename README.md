@@ -128,3 +128,37 @@ watch(page, async () => {
     useRouter().push({ query: { page: page.value } });
 });
 ```
+
+### Search with Laravel Query Builder
+
+> app/Http/Controllers/Links.php
+
+```
+function index(Request $request){
+        $links = QueryBuilder::for (Link::class)
+            ->allowedFilters(['full_link', 'short_link'])
+            ->allowedSorts('full_link', 'short_link', 'views', "id")
+            ->where("user_id", Auth::user()->id)
+            ->paginate($request->get('perPage', 5));
+        return response()->json($links);
+    }
+```
+
+# Frontend search - querie includes 'full_link'
+
+> ![queries](https://github.com/samedandev/2603_Laravel9_vuejs/blob/main/_printscreens/printscreen04.jpg)
+> FRONTEND/pages/links/index.vue
+
+```
+const queries = ref({
+    page: 1,
+    sort: "",
+    "filter[full_link]": "",
+    ...useRoute().query,
+});
+<SearchInput v-model="queries['filter[full_link]']" />
+```
+
+# Debounce the search to 500ms
+
+> FRONTEND/components/SearchInput.vue
