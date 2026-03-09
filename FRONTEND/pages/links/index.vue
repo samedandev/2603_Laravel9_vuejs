@@ -1,22 +1,32 @@
 <script setup lang="ts">
 import axios from "axios";
 import { TailwindPagination } from "laravel-vue-pagination";
+import { PaginatedResponse, Link } from "@/types";
+
+//  search queries
+const queries = ref({
+    page: 1,
+    sort: "",
+    "filter[full_link]": "",
+    ...useRoute().query,
+});
 
 definePageMeta({
     middleware: ["auth"],
 });
 
-const data = ref([]);
-const page = ref(1); // initial load
+const data = ref<PaginatedResponse<Link | null>>(null);
+const page = ref(useRoute().query.page || 1); // initial Page=1 load
 await getLinks();
 
 // declare data as reactive to update links with pagination
-let links = computed(() => data.value.data);
+let links = computed(() => data.value?.data);
 
 // pagination page
 
 watch(page, async () => {
     getLinks();
+    useRouter().push({ query: { page: page.value } });
 });
 
 async function getLinks() {
@@ -50,7 +60,7 @@ async function getLinks() {
         <nav class="flex justify-between mb-4 items-center">
             <h1 class="mb-0">My Links</h1>
             <div class="flex items-center">
-                <SearchInput modelValue="" />
+                <SearchInput v-model="queries['filter[full_link]']" />
                 <NuxtLink to="/links/create" class="ml-4">
                     <IconPlusCircle class="inline" /> Create New
                 </NuxtLink>

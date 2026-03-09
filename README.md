@@ -114,3 +114,17 @@ async function initUser() {
 > Frontedn/pages/links/index.vue
 
 > ![Pagination](https://github.com/samedandev/2603_Laravel9_vuejs/blob/main/_printscreens/printscreen02.jpg)
+
+# Add Queries in URL for pagination
+
+> ![queries](https://github.com/samedandev/2603_Laravel9_vuejs/blob/main/_printscreens/printscreen03.jpg)
+
+> Frontend/pages/links/index.vue
+
+```
+const page = ref(useRoute().query.page || 1);
+watch(page, async () => {
+    getLinks();
+    useRouter().push({ query: { page: page.value } });
+});
+```
