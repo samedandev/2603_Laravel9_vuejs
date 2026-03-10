@@ -174,3 +174,29 @@ const queries = ref({
 # Refresh data on frontend
 
 > FRONTEND/pages/links/index.vue -> <button @click="getLinks"><IconRefresh /></button>
+
+## useLinks Composable
+
+> FRONTEND/composable/useLinks.ts
+
+# Transform data from DBB to Vue
+
+> RawLink - data from DBB
+
+# Get data from composable
+
+> FRONTEND/pages/links.index.vue -> const {data, index}= useLinks()
+
+# Use Composable to transform data
+
+> FRONTEND/pages/links.index.vue
+
+```
+<td :title="`created ${useTimeAgo(link.created_at).value}`" >
+  <a :href="link.full_link" target="_blank">
+    {{ link.full_link.replace(/^http(s?):\/\//, "")}}
+  </a>
+</td>
+```
+
+> ![dateTransformed](https://github.com/samedandev/2603_Laravel9_vuejs/blob/main/_printscreens/printscreen06.jpg)

@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import axios from "axios";
 import { TailwindPagination } from "laravel-vue-pagination";
-import { PaginatedResponse, Link } from "@/types";
 
 //  search queries
 const queries = ref({
@@ -10,12 +8,13 @@ const queries = ref({
     "filter[full_link]": "",
     ...useRoute().query,
 });
+// Get Data from composable
+const { data, index: getLinks } = useLinks({ queries: queries });
 
 definePageMeta({
     middleware: ["auth"],
 });
 
-const data = ref<PaginatedResponse<Link | null>>(null);
 // const page = ref(useRoute().query.page || 1); // initial Page=1 load
 await getLinks();
 
@@ -24,42 +23,9 @@ let links = computed(() => data.value?.data);
 
 // pagination page
 
-watch(
-    queries,
-    async () => {
-        getLinks();
-        useRouter().push({ query: queries.value });
-    },
-    { deep: true },
-);
-
-async function getLinks() {
-    // @ts-expect-error page is number and its ok
-    const qs = new URLSearchParams(queries.value).toString();
-    const { data: res } = await axios.get(`/links?${qs}`);
-    data.value = res;
-}
-
-// const links = [
-//     {
-//         short_link: "234jlsfsf",
-//         full_link: "https://vueschool.io",
-//         views: 3,
-//         id: 1,
-//     },
-//     {
-//         short_link: "adfaowerw",
-//         full_link: "https://google.com",
-//         views: 1,
-//         id: 2,
-//     },
-//     {
-//         short_link: "234sfdjaip",
-//         full_link: "https://vuejsnation.com/",
-//         views: 0,
-//         id: 3,
-//     },
-// ];
+watch(queries, () => useRouter().push({ query: queries.value }), {
+    deep: true,
+});
 </script>
 <template>
     <div>
@@ -90,13 +56,15 @@ async function getLinks() {
                         <th class="w-[10%]">Edit</th>
                         <th class="w-[10%]">Trash</th>
                         <th class="w-[6%] text-center">
-                            <button @click="getLinks"><IconRefresh /></button>
+                            <button @click="getLinks()"><IconRefresh /></button>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="link in links">
-                        <td>
+                        <td
+                            :title="`created ${useTimeAgo(link.created_at).value}`"
+                        >
                             <a :href="link.full_link" target="_blank">
                                 {{
                                     link.full_link.replace(/^http(s?):\/\//, "")

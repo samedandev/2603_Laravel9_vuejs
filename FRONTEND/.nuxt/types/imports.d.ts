@@ -203,6 +203,7 @@ declare global {
   const useLazyAsyncData: typeof import('../../node_modules/nuxt/dist/app')['useLazyAsyncData']
   const useLazyFetch: typeof import('../../node_modules/nuxt/dist/app')['useLazyFetch']
   const useLink: typeof import('vue-router')['useLink']
+  const useLinks: typeof import('../../composables/useLinks')['useLinks']
   const useLocalStorage: typeof import('@vueuse/core')['useLocalStorage']
   const useMagicKeys: typeof import('@vueuse/core')['useMagicKeys']
   const useManualRefHistory: typeof import('@vueuse/core')['useManualRefHistory']
@@ -514,6 +515,7 @@ declare module 'vue' {
     readonly useLazyAsyncData: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app')['useLazyAsyncData']>
     readonly useLazyFetch: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app')['useLazyFetch']>
     readonly useLink: UnwrapRef<typeof import('vue-router')['useLink']>
+    readonly useLinks: UnwrapRef<typeof import('../../composables/useLinks')['useLinks']>
     readonly useLocalStorage: UnwrapRef<typeof import('@vueuse/core')['useLocalStorage']>
     readonly useMagicKeys: UnwrapRef<typeof import('@vueuse/core')['useMagicKeys']>
     readonly useManualRefHistory: UnwrapRef<typeof import('@vueuse/core')['useManualRefHistory']>
