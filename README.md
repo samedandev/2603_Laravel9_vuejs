@@ -162,3 +162,11 @@ const queries = ref({
 # Debounce the search to 500ms
 
 > FRONTEND/components/SearchInput.vue
+
+## Sorting - Laravel Query Builder
+
+> https://spatie.be/docs/laravel-query-builder/v6/features/sorting
+
+# Sort by '&sort=-full_link' or '&sort=full_link'
+
+> ![sorting](https://github.com/samedandev/2603_Laravel9_vuejs/blob/main/_printscreens/printscreen05.jpg)

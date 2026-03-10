@@ -77,7 +77,14 @@ async function getLinks() {
             <table class="table-fixed w-full">
                 <thead>
                     <tr>
-                        <th class="w-[35%]">Full Link</th>
+                        <!-- <th class="w-[35%]">Full Link</th> -->
+                        <TableTh
+                            v-model="queries.sort"
+                            name="full_link"
+                            class="w-[29%]"
+                        >
+                            Full Link
+                        </TableTh>
                         <th class="w-[35%]">Short Link</th>
                         <th class="w-[10%]">Views</th>
                         <th class="w-[10%]">Edit</th>
