@@ -200,3 +200,15 @@ const queries = ref({
 ```
 
 > ![dateTransformed](https://github.com/samedandev/2603_Laravel9_vuejs/blob/main/_printscreens/printscreen06.jpg)
+
+## Edit Links
+
+# Backend
+
+> app/Http/Controllers/Links.php
+
+# Frontend
+
+> /FRONTEND/pages/links/[id].vue
+
+> ![edit link](https://github.com/samedandev/2603_Laravel9_vuejs/blob/main/_printscreens/printscreen07.jpg)
