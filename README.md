@@ -170,3 +170,7 @@ const queries = ref({
 # Sort by '&sort=-full_link' or '&sort=full_link'
 
 > ![sorting](https://github.com/samedandev/2603_Laravel9_vuejs/blob/main/_printscreens/printscreen05.jpg)
+
+# Refresh data on frontend
+
+> FRONTEND/pages/links/index.vue -> <button @click="getLinks"><IconRefresh /></button>
