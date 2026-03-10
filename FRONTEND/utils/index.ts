@@ -6,3 +6,9 @@ export function handleInvalidForm(err: any, node?: FormKitNode) {
         node?.setErrors([], err.response.data.errors);
     }
 }
+
+// export function handleSuccessForm(data: any, node?: FormKitNode) {
+//     if (data.response?.status === 201) {
+//         node?.setMessage([], data.response.data.errors);
+//     }
+// }
