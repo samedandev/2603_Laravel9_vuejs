@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { FormKitNode } from "@formkit/core";
 import { Link } from "types";
+import { handleInvalidForm, handleSuccessForm } from "../../utils";
 
 definePageMeta({
     middleware: ["auth"],
@@ -12,6 +13,7 @@ await find(Number(useRoute().params.id));
 async function handleUpdate(payload: Partial<Link>, node?: FormKitNode) {
     try {
         await update(Number(useRoute().params.id), payload);
+        handleSuccessForm(payload, node);
     } catch (err) {
         handleInvalidForm(err, node);
     }

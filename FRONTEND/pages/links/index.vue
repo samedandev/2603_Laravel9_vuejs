@@ -9,7 +9,9 @@ const queries = ref({
     ...useRoute().query,
 });
 // Get Data from composable
-const { data, index: getLinks } = useLinks({ queries: queries });
+const { data, index: getLinks, destroy } = useLinks({ queries: queries });
+
+let deleted = false;
 
 definePageMeta({
     middleware: ["auth"],
@@ -26,6 +28,14 @@ let links = computed(() => data.value?.data);
 watch(queries, () => useRouter().push({ query: queries.value }), {
     deep: true,
 });
+
+async function handleDelete(id: number) {
+    await destroy(id);
+    if (data.value) {
+        data.value.data = data.value?.data.filter((link) => link.id !== id);
+        deleted = true;
+    }
+}
 </script>
 <template>
     <div>
@@ -38,7 +48,9 @@ watch(queries, () => useRouter().push({ query: queries.value }), {
                 </NuxtLink>
             </div>
         </nav>
-
+        <p style="color: green" v-if="deleted">
+            Link has been deleted successfully.
+        </p>
         <div v-if="true">
             <table class="table-fixed w-full">
                 <thead>
@@ -93,7 +105,9 @@ watch(queries, () => useRouter().push({ query: queries.value }), {
                             /></NuxtLink>
                         </td>
                         <td>
-                            <button><IconTrash /></button>
+                            <button @click="handleDelete(link.id)">
+                                <IconTrash />
+                            </button>
                         </td>
                         <td></td>
                     </tr>

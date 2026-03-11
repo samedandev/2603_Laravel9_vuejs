@@ -40,6 +40,7 @@ declare global {
   const getCurrentScope: typeof import('vue')['getCurrentScope']
   const h: typeof import('vue')['h']
   const handleInvalidForm: typeof import('../../utils/index')['handleInvalidForm']
+  const handleSuccessForm: typeof import('../../utils/index')['handleSuccessForm']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
   const inject: typeof import('vue')['inject']
   const isDefined: typeof import('@vueuse/core')['isDefined']
@@ -352,6 +353,7 @@ declare module 'vue' {
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly handleInvalidForm: UnwrapRef<typeof import('../../utils/index')['handleInvalidForm']>
+    readonly handleSuccessForm: UnwrapRef<typeof import('../../utils/index')['handleSuccessForm']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
     readonly isDefined: UnwrapRef<typeof import('@vueuse/core')['isDefined']>
